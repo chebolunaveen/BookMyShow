@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.*;
@@ -24,12 +25,20 @@ public class TicketEntity {
     private String alloted_seats;
 
     int amount;
-
+//TicketEntity is child class of UserEntity
     @ManyToOne
     @JsonIgnore
     @JoinColumn
     UserEntity user;
 
-    //List<ShowSeatsEntity>
+    //TicketEntity is parentclass  of UserEntity
+    @OneToMany(cascade=CascadeType.ALL)
+    @JsonIgnore
+    List<ShowSeatsEntity> listOfSeats;
+
+    //it is child class to showentity
+    @OneToMany
+    @JsonIgnore
+    private ShowEntity show;
 
 }
