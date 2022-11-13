@@ -1,15 +1,13 @@
 package com.example.project.BookMyShow.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.*;
 
+@Builder
 @Entity
 @Getter
 @Setter

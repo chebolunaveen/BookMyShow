@@ -2,13 +2,11 @@ package com.example.project.BookMyShow.Models;
 
 import com.example.project.BookMyShow.enums.SeatType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
 @Getter
 @Setter
 @Entity

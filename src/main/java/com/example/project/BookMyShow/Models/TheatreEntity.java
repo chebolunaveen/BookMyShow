@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @ToString
+@Builder
 public class TheatreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
