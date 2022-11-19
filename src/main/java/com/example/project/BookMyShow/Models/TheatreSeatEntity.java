@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="theatre_seats")
 public class TheatreSeatEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,13 +6,16 @@ import com.example.project.BookMyShow.Models.TheatreSeatEntity;
 import com.example.project.BookMyShow.Repository.TheatreRepository;
 import com.example.project.BookMyShow.Repository.TheatreSeatRepository;
 import com.example.project.BookMyShow.Service.TheatreService;
+import com.example.project.BookMyShow.dto.EntryTRequestDto.TheatreEntryDto;
+import com.example.project.BookMyShow.dto.ResponseDto.TheatreResponseDto;
 import com.example.project.BookMyShow.dto.TheatreDto;
 import com.example.project.BookMyShow.enums.SeatType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class TheatreServiceImp implements TheatreService {
 
     @Autowired
@@ -21,8 +24,8 @@ public class TheatreServiceImp implements TheatreService {
     @Autowired
     TheatreSeatRepository theatreSeatRepository;
     @Override
-    public TheatreDto addTheatre(TheatreDto theatreDto) {
-        TheatreEntity theatreEntity= TheatreConverter.convertDtoToEntity(theatreDto);
+    public TheatreResponseDto addTheatre(TheatreEntryDto theatreEntrryDto) {
+        TheatreEntity theatreEntity= TheatreConverter.convertDtoToEntity(theatreEntrryDto);
         //while creating Theatre to create sats also
 
         List<TheatreSeatEntity> seats=createTheatreSeats();
@@ -31,8 +34,9 @@ public class TheatreServiceImp implements TheatreService {
         for(TheatreSeatEntity theatreSeatEntity: seats){
             theatreSeatEntity.setTheater(theatreEntity);
         }
-        theatreRepository.save(theatreEntity);
-        return theatreDto;
+        theatreEntity=theatreRepository.save(theatreEntity);
+        TheatreResponseDto theatreResponseDto=TheatreConverter.convertEntityToDto(theatreEntity);
+        return theatreResponseDto;
 
     }
 List<TheatreSeatEntity> createTheatreSeats(){
@@ -50,14 +54,14 @@ List<TheatreSeatEntity> createTheatreSeats(){
     theatreSeatRepository.saveAll(seats);
     return seats;
 }
-TheatreSeatEntity getTheatreSeat(String seatname , int rate, SeatType seatType){
-        return TheatreSeatEntity.builder().SeatNumber(seatname).rate(rate).seatType(seatType).build();
+TheatreSeatEntity getTheatreSeat(String seatNo , int rate, SeatType seatType){
+        return TheatreSeatEntity.builder().SeatNumber(seatNo).rate(rate).seatType(seatType).build();
 }
     @Override
-    public TheatreDto getTheatre(int id) {
+    public TheatreResponseDto getTheatre(int id) {
        TheatreEntity theatreEntity=theatreRepository.findById(id).get();
-       TheatreDto theatreDto=TheatreConverter.convertEntityToDto(theatreEntity);
-       return theatreDto;
+       TheatreResponseDto theatreResponseDto=TheatreConverter.convertEntityToDto(theatreEntity);
+       return theatreResponseDto;
 
     }
 }

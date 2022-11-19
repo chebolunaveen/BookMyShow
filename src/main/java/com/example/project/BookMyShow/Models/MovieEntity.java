@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
+@Table(name="movies")
 public class MovieEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -26,7 +27,7 @@ public class MovieEntity {
 
     //it is parent to ShowEntity
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ShowEntity> shows;
 }

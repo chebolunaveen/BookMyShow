@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class ShowSeatsEntity {
 
     @Id
@@ -29,11 +30,12 @@ public class ShowSeatsEntity {
     @Column(name="seat_type",nullable = false)
     private SeatType SeatType;
 
+
     @Column(name="is_booked",columnDefinition ="bit(1) default 0" ,nullable = false)
     boolean booked;
 
     @Temporal(TemporalType.TIMESTAMP)
- @Column(name="booked_at")
+   @Column(name="booked_at")
     private Date bookedAt;
     //showseatsentity is child of ticketsentity and showentity
 

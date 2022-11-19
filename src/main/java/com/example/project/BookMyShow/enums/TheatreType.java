@@ -1,6 +1,6 @@
 package com.example.project.BookMyShow.enums;
 
-public enum TheaterType {
+public enum TheatreType {
     Single,
     Multiplex
 }

@@ -1,6 +1,6 @@
 package com.example.project.BookMyShow.Models;
 
-import com.example.project.BookMyShow.enums.TheaterType;
+import com.example.project.BookMyShow.enums.TheatreType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 @ToString
 @Builder
+@Table(name="theatre")
 public class TheatreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,7 @@ public class TheatreEntity {
     private String name;
     @Enumerated(EnumType.STRING)
     @Column(name="Theater_type",nullable = false)
-    private TheaterType type;
+    private TheatreType type;
 
     @Column(name="city",nullable = false)
     private String city;
@@ -32,7 +33,7 @@ public class TheatreEntity {
     private String address;
 
     //it is parent to showentity
-    @OneToMany(mappedBy="theater",cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="theatre",cascade=CascadeType.ALL)
     @JsonIgnore
     private List<ShowEntity> shows;
 
