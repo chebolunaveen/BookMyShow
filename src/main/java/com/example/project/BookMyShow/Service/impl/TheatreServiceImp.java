@@ -10,6 +10,7 @@ import com.example.project.BookMyShow.dto.EntryTRequestDto.TheatreEntryDto;
 import com.example.project.BookMyShow.dto.ResponseDto.TheatreResponseDto;
 import com.example.project.BookMyShow.dto.TheatreDto;
 import com.example.project.BookMyShow.enums.SeatType;
+import com.example.project.BookMyShow.enums.TheatreType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +25,21 @@ public class TheatreServiceImp implements TheatreService {
     @Autowired
     TheatreSeatRepository theatreSeatRepository;
     @Override
-    public TheatreResponseDto addTheatre(TheatreEntryDto theatreEntrryDto) {
-        TheatreEntity theatreEntity= TheatreConverter.convertDtoToEntity(theatreEntrryDto);
+    public TheatreResponseDto addTheatre(TheatreEntryDto theatreEntryDto) {
+        TheatreEntity theatreEntity= TheatreConverter.convertDtoToEntity(theatreEntryDto);
         //while creating Theatre to create sats also
 
+        //create the seats
         List<TheatreSeatEntity> seats=createTheatreSeats();
+        theatreEntity.setSeats(seats);
+        theatreEntity.setShows(null);
 
         //need to set theatreid for all these seats
         for(TheatreSeatEntity theatreSeatEntity: seats){
             theatreSeatEntity.setTheater(theatreEntity);
         }
+        theatreEntity.setType(TheatreType.Single);
+
         theatreEntity=theatreRepository.save(theatreEntity);
         TheatreResponseDto theatreResponseDto=TheatreConverter.convertEntityToDto(theatreEntity);
         return theatreResponseDto;
@@ -53,6 +59,7 @@ List<TheatreSeatEntity> createTheatreSeats(){
 
     theatreSeatRepository.saveAll(seats);
     return seats;
+    //add in theatreSeatEntity type
 }
 TheatreSeatEntity getTheatreSeat(String seatNo , int rate, SeatType seatType){
         return TheatreSeatEntity.builder().SeatNumber(seatNo).rate(rate).seatType(seatType).build();

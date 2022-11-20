@@ -22,14 +22,14 @@ public class MovieServiceImp implements MovieService {
     @Override
     public MovieResponseDto addMovie(MovieEntryDto movieEntryDto) {
     //check if movie name is present in database or not if present return exception
-        if(movieRepository.count()>0){
-           List<MovieEntity> all =movieRepository.findAll();
-           for(MovieEntity movieEntity:all){
-               if(movieEntity.getName().equals(movieEntity.getName())){
-                   throw new DuplicateEntityException("movie is already added");
-               }
-           }
-        }
+//        if(movieRepository.count()>0){
+//           List<MovieEntity> all =movieRepository.findAll();
+//           for(MovieEntity movieEntity:all){
+//               if(movieEntity.getName().equals(movieEntity.getName())){
+//                   throw new DuplicateEntityException("movie is already added");
+//               }
+//           }
+//        }
 
 //        if(movieRepository.getMovieEntityByName(movieEntryDto.getName())==true){
 //            throw new DuplicateEntityException("movie name already exists");

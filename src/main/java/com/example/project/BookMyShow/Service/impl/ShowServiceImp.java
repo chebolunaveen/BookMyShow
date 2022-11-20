@@ -61,11 +61,12 @@ public class ShowServiceImp implements ShowService {
                     showSeatsEntityList.add(showSeatsEntity);
         }
         //need to set show Entity for each of the showseat
+        showSeatsRepository.saveAll(showSeatsEntityList);
         for(ShowSeatsEntity showSeatsEntity:showSeatsEntityList){
             showSeatsEntity.setShow(showEntity);
 
         }
-        showSeatsRepository.saveAll(showSeatsEntityList);
+        showEntity.setSeats(showSeatsEntityList);
     }
 
 }

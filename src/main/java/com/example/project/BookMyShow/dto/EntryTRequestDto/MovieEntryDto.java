@@ -9,5 +9,6 @@ import java.time.LocalDate;
 @Builder
 public class MovieEntryDto {
  String name;
+
  LocalDate releaseDate;
 }

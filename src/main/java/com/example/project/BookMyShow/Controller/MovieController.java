@@ -17,7 +17,7 @@ public class MovieController {
     MovieServiceImp movieServiceImp;
 
 @PostMapping("/add")
-    public MovieResponseDto addMovie(@RequestBody()MovieEntryDto movieEntryDto){
+    public MovieResponseDto addMovie(@RequestBody() MovieEntryDto movieEntryDto){
       return movieServiceImp.addMovie(movieEntryDto);
 }
 
